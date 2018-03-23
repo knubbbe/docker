@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  webserver:
+    build: ./docker
+    image: knubbe_php
+    ports:
+      - "9000:80"
+      - "4443:443"
+    volumes:
+      - ./html:/var/www/html
+      - ./docker/configs/php.ini:/usr/local/etc/php/conf.d/custom.php.ini
+    links:
+      - db
+
+  db:
+    image: mysql:5.7
+    ports: 
+      - "4406:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=lvm
