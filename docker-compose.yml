@@ -9,6 +9,7 @@ services:
       - "4443:443"
     volumes:
       - ./html:/var/www/html
+      - ./adminer:/var/www/html/adminer
       - ./docker/configs/php.ini:/usr/local/etc/php/conf.d/custom.php.ini
     links:
       - db

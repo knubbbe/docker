@@ -16,4 +16,6 @@ RUN docker-php-ext-install pdo pdo_mysql mysql mbstring gd curl
 
 
 RUN a2enmod rewrite
+COPY ./configs/vhost.conf /etc/apache2/sites-available/dev.conf
+RUN a2ensite dev
 RUN service apache2 restart
