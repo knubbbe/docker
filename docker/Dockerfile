@@ -13,9 +13,14 @@ RUN apt-get install -y \
     && apt-get autoremove -y
 
 RUN docker-php-ext-install pdo pdo_mysql mysql mbstring gd curl
+RUN pecl install memcache
 
 
+RUN a2enmod headers
 RUN a2enmod rewrite
 COPY ./configs/vhost.conf /etc/apache2/sites-available/dev.conf
+COPY ./ssl/eckerolinjen.crt /var/www/ssl/eckerolinjen.crt
+COPY ./ssl/eckerolinjen.key /var/www/ssl/eckerolinjen.key
 RUN a2ensite dev
+RUN a2enmod ssl
 RUN service apache2 restart
