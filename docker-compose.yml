@@ -16,10 +16,17 @@ services:
 
   db:
     image: mysql:5.7
-    ports: 
+    command: mysqld --sql_mode=""
+    ports:
       - "4406:3306"
     volumes:
       - ./.db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=docker
-      - MYSQL_DATABASE=lvm
+      - MYSQL_DATABASE=<password>
+
+  mailhog:
+      image: mailhog/mailhog:v1.0.0
+      ports:
+        - "1025:1025"
+        - "8025:8025"
